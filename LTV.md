@@ -48,8 +48,8 @@ SELECT p.user_id,
        o.order_amt,
        o.event_dt,
        p.first_session_dt,
-       EXTRACT(DAY FROM AGE(o.event_dt, p.first_session_dt)) AS ltv,
-       SUM(o.revenue) OVER (PARTITION BY p.user_id ORDER BY o.event_dt) AS sum_order_amt
+       EXTRACT(DAY FROM AGE(o.event_dt, p.first_session_dt)) AS livetime,
+       SUM(o.revenue) OVER (PARTITION BY p.user_id ORDER BY o.event_dt) AS ltv
 FROM profile p
 JOIN online_store.orders o ON p.user_id = o.user_id; 
 ```
